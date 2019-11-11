@@ -1,0 +1,52 @@
+error code
+
+#include<string.h>
+#include <stdio.h>
+void main()
+{
+    char str[100];	  
+    int n=0,i=0;
+    printf("请输入字符串："); 
+    gets(str);
+    n=strlen(str);
+    for(i=0;i<n;i++)
+    {
+       printf("%c",str[i]);
+    }
+    lengthOfLongestSubstring(str);      
+}
+
+int lengthOfLongestSubstring(char* s) 
+{
+    int map[128]={0};  //定义一个空数组存储ASSCII值来反映某一个字符是否在子串中出现过（若map[s[j]=0，则这个字符在子串中出现过，为重复字符；若map[s[j]=2，表示该字符出现在字符串s的第2个位置，字符的下标为2-1=1(下标从0开始)）
+    int i=0,j=0;
+    int max=0;
+    int length=strlen(s);①
+    for(j=0;j<length;j++)
+    {
+        If(map[s[j]]==0)
+    ②      map[s[j]]=j+1;
+       else             ③
+           i=map[s[j]];
+       max=( max>(j-i+1) ? max : (j-i+1) );
+    }
+    printf("\n%d",max);
+}
+
+correct code
+
+int lengthOfLongestSubstring(char* s) 
+{
+    int map[128]={0};
+    int i=0,j=0;
+    int max=0;
+    for(j=0;s[j];j++)
+    {   
+       if(map[s[j]]>i)  i=map[s[j]];
+       map[s[j]]=j+1;
+       max=(max>(j-i+1) ? max : (j-i+1) );
+    }
+    return max;  
+}
+
+
