@@ -1,0 +1,33 @@
+/*
+ * Return an array of arrays of size *returnSize.
+ * 返回一个大小是 *returnSize 的，由子数组构成的      数组
+ 
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * 每个子数组的大小用  *returnColumnSizes数组  返回
+ 
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ * 返回的数组与 记录每个子数组大小的数组 都必须动态申请，允许调用free()释放空间
+ */
+int** generate(int numRows, int* returnSize, int** returnColumnSizes)
+{
+    *returnSize=numRows;//返回总的行数，即时p数组的大小，又是*returnColumnSize数组的大小
+    int ** p=(int **)malloc(sizeof(int *)*numRows);//动态申请一维指针数组
+    *returnColumnSizes=(int *)malloc(sizeof(int)*numRows);//动态申请记录子数组大小的数组
+    
+    for(int i=0;i<numRows;i++)
+    {
+        p[i]=(int *)malloc(sizeof(int)*(i+1));//为每一个一维指针申请适合的数组空间
+        
+        (*returnColumnSizes)[i]=i+1;
+        p[i][0]=1,p[i][i]=1;
+        for(int j =1;j<i;j++)
+            p[i][j]=p[i-1][j]+p[i-1][j-1];
+    }
+    return p;
+}
+/*
+实际上返回的是一个动态申请的二维不等长数组，
+通过指针传递的变量有两个，
+一个是记录每一个子数组大小的一维数组，这里使用二重指针操作，防止在函数传参的时候失去对其的控制权
+一个是记录大小的整形变量，既是返回的二维数组的行数，又是记录每一个子数组大小的一维数组的大小
+*/
