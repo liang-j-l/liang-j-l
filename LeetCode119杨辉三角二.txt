@@ -1,0 +1,24 @@
+/*
+题目：给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。
+思路：只申请第K行的空间，使用动态规划，将每行第j个元素通过使用for循环覆盖更新
+*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ * 返回的数组必须被动态申请，允许调用free()释放空间
+ */
+int* getRow(int rowIndex, int* returnSize)
+{
+     *returnSize=rowIndex+1;
+     int *p =(int *)malloc(sizeof(int)*(rowIndex+1));//动态申请记录第k行子数组大小的数组
+    int tail=0;
+     for(int i=0;i<rowIndex+1;i++)//动态规划
+     {
+         p[tail++]=1;
+         for(int j=i-1;j>0;--j)
+         {
+             p[j]=p[j]+p[j-1];
+         }
+     }
+     return p;
+}
+
