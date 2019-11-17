@@ -1,4 +1,8 @@
 /*
+给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+*/
+
+/*
  * Return an array of arrays of size *returnSize.
  * 返回一个大小是 *returnSize 的，由子数组构成的      数组
  
