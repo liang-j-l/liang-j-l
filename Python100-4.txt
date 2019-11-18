@@ -1,0 +1,18 @@
+#4.题目：输入某年某月某日，判断这一天是这一年的第几天？
+
+list=[]#嗯...我也不知道为什么要用列表，明明可以直接定义年月日...
+year=eval(input("请输入年："))
+list.append(year)
+month=eval(input("请输入月："))
+list.append(month)
+day=eval(input("请输入日："))
+list.append(day)
+days=[31,29,31,30,31,30,31,31,30,31,30,31]
+if list[0]%4==0 and list[0]%100!=0:
+    days[1]=28
+result=0
+for i in range(month-1):
+    result+=days[i]
+results=result+day
+
+print("%d年%d月%d日是%d年的第%d天"%(list[0],list[1],list[2],list[0],results))#原来print还可以这么用注意百分号前面没有标点
