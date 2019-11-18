@@ -1,0 +1,9 @@
+#5.题目：输入三个整数x,y,z，请把这三个数由小到大输出。
+list=[]
+x=eval(input("请输入x："))
+list.append(x)
+y=eval(input("请输入y："))
+list.append(y)
+z=eval(input("请输入z："))
+list.append(z)
+print(sorted(list))#将列表排序后输出
