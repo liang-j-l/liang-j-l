@@ -1,0 +1,10 @@
+#7.题目：将一个列表的数据复制到另一个列表中。
+
+a=[]
+#b=[]
+len=eval(input("请输入列表长度："))
+for i in range (len):#录入a列表
+    num=eval(input())
+    a.append(num)
+b=a[:]#将a列表的所有值赋给b列表
+print(b)
