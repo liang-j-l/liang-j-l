@@ -1,0 +1,11 @@
+#14.题目：判断101-200之间有多少个素数，并输出所有素数。
+
+for i in range(101,201):
+    for j in range (2,i+1):
+    #for j in range (2,i): 错误，会导致没有结果输出，原因：range（）取不到右边界i，即j永远不能等于i,所以 if i==j:不会执行，不会打印出结果
+        if i%j==0:
+            break
+    if i==j:
+        print(i)
+
+
