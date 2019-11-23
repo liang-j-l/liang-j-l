@@ -1,0 +1,62 @@
+题目：
+给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，
+只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，
+返回 true；否则，返回 false 。
+
+typedef struct stack
+{
+    int top;  //不是指针类型，指向栈顶元素的下标     
+    int num[1000];//栈的存储区，提示里有数组的最大长度
+} stack;
+
+void init (stack *s)
+{
+    s->top=-1;//初始化是清空数据结构（栈）
+}
+bool isempty(stack *s) 
+{
+    return (s->top==-1);
+}
+//可以人为控制入栈的元素的个数，使栈不溢出
+/*bool isfull(stack *s)
+{
+    return (s->top==999);
+}*/
+void push(stack *s,int a)
+{
+    //先移动top指向新的栈顶，再将入栈的值赋给top指向的位置
+    s->top++;
+    s->num[s->top]=a;
+}
+
+ void pop(stack *s,int *b)
+{
+    //先出栈，再使top--
+    b=s->num[s->top];
+    s->top--;
+}
+int gettop(stack *s) 
+{
+    return s->num[s->top];
+}
+//主义函数应该先定义后使用，即函数放置的顺序
+
+bool validateStackSequences(int* pushed, int pushedSize, int* popped, int poppedSize)
+{
+    stack s;//定义一个栈
+    init (&s);//传入栈的地址
+    int i=0,j=0,t;
+    //pushed 是 popped 的排列，即pushedSize<poppedSize，也就是说，若给定的出栈的排列正确，不会出现pooped数组为空，但栈内还有元素的情况
+    //所以我们可以定义两个循环控制变量分别表示pushed和popped元素的进出情况
+    for(i=0;i<pushedSize;i++)
+    {
+        push(&s,pushed[i]);
+        while(!isempty(&s)&&j<poppedSize&&gettop(&s)==popped[j])//判空，防止j越界
+        {
+           pop(&s,&t);
+           j++; 
+        }
+    }
+    //return j==poppedSize;//判断popped数组是否遍历完全
+    return s.top==-1;//判断出栈是否完全
+}
