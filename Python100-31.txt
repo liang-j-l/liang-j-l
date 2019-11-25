@@ -1,0 +1,9 @@
+#31.题目：利用递归方法求5!。
+def fac(n):
+    if n==1 or n==0:   #是用if语句判断，不是使用for循环
+        return 1
+    else:
+        return fac(n-1)*(n)
+
+a=eval(input("请输入一个整数："))
+print (fac(a))
