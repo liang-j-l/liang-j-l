@@ -1,0 +1,30 @@
+#16.题目：将一个正整数分解质因数。例如：输入90,打印出90=2*3*3*5
+#本题不用判断因数是不是质数
+import math
+num=eval(input("请输入一个正整数："))
+if num<0:
+    print("输入错误")
+print("%d = "%num,end="")  #end=""使打印出来的结果不换行
+while(num>1):
+    for i in range (2,int(math.sqrt(num)+1)):
+        if num%i==0:
+            print('%d*'%i,end='')
+            num=int(num/i)
+            break
+    else:
+        print(num)
+        break
+#此代码需要注意for-else
+
+（2）
+n = int(input('请输入一个整数：'))
+print('%d='%n,end='')
+while n>1:
+    for i in range(2,n+1):
+        if n%i==0:
+            n=int(n/i)
+            if n==1:
+                print('%d'%i,end='')
+            else:
+                print('%d*'%i,end='')
+            break
