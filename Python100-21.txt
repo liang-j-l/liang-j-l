@@ -1,0 +1,16 @@
+#21.题目：输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数。
+str=input("请输入字符串：")
+alpha=0#字母个数
+digit=0#数字个数
+space=0#空格
+other=0#其他
+for i in range(len(str)):#range(len(str)+1)错误，range是从0到len(str)-1
+    if str[i].isalpha():#isalpha()判断是否是字符
+        alpha+=1
+    elif str[i].isdigit():#isdigit()判断是否是数字
+        digit+=1
+    elif str[i].isspace():#isspace()判断是否是空格
+        space+=1
+    else:
+        other+=1
+print("字母个数=%d,数字个数=%d,空格个数=%d,其他字符个数=%d"%(alpha,digit,space,other))
