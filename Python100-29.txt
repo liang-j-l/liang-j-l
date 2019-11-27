@@ -1,0 +1,10 @@
+#29.题目：求1+2!+3!+...+20!的和。
+def fac(n):
+    if n==1 or n==0:   #是用if语句判断，不是使用for循环
+        return 1
+    else:
+        return fac(n-1)*(n)
+sum=0
+for i in range(1,21):
+    sum=sum+fac(i)
+print(sum)
