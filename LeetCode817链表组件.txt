@@ -1,0 +1,42 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 注意：题目返回值是列表G中的组件个数，不是最长组件长度
+ */
+
+// 创建一个长度为10000的布尔值类型(占据空间最少)数组Bool，默认存储值为0, 数组G中对应的值对应索引的值为1，这样根据链表节点存储的值判断是否存在于数组G的问题就可以转换为数组Bool某索引上对应值的问题，时间复杂度由O(N)，空间复杂度为O(10000)。
+//后续若有类似的数组判断的问题，条件允许的情况下可以使用类似的空间换时间的方法进行时间复杂度的优化。最后是代码:
+
+int numComponents(struct ListNode* head, int* G, int GSize)
+{
+    if(head==NULL || GSize==0)
+        return 0;
+
+    struct ListNode* p;
+    p = head;//在本体中，head表示第一个结点，不是头结点，若将head当成头结点来用，链表第1个数字就会被忽略，不参与接下来的比较
+    int Bool[10000] = {0};//可以优化为Bool[max(给定链表)]，减少申请的空间数目
+    int i,num=0, flag;
+
+    for(i=0; i<GSize; i++)
+        Bool[G[i]]++;
+    
+    while(p!=NULL)
+    {
+        flag = 0;
+        while(p!=NULL && Bool[p->val]!=0)//需要先判断p是否为空，然后再判断链表的值是否在G中，否则当p为空时，找不到p->val，程序会报错
+        {
+            p = p->next;
+            flag = 1;
+        }
+
+        if(flag == 1)//链表添加一个判断标志，当flag==1时，表示执行过while循环，反之表示没有执行while循环，即链表的值没出现在G中，或者链表已经遍历到结尾，只有当flag==1时num才应该自增。
+            num++;
+        
+        if(p != NULL)//不执行while循环时，p也需要向后移动，并且需要判断while不为空
+            p = p->next;
+    }
+    return num;
+}
