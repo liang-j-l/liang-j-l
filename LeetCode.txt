@@ -1,0 +1,28 @@
+//给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。
+
+//你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。
+
+
+
+
+int findShortestSubArray(int* nums, int numsSize)
+{
+    int i,result=50000,count=0,maxcount=0;
+    int n[50000]={0};//存放每个数字的频率
+    int last[50000]={0};//存放每个数字结尾坐标
+    int first[50000]={0};//存放每个数字起始坐标
+    for(i=0;i<numsSize;i++)//计算出每个数字出现的频率及最大频率
+    {
+        if(n[nums[i]]==0)//起始下标的条件是：这个元素在数组中是第一次出现!!!
+            first[nums[i]]=i;
+        n[nums[i]]++;
+        last[nums[i]]=i;                         
+        maxcount=(maxcount>n[nums[i]]?maxcount:n[nums[i]]);//最大频率
+    }
+    for(i=0;i<numsSize;i++)//计算最小距离
+    {
+        if(n[nums[i]]==maxcount)//当数字nums[i]为出现次数最多时，即为所求
+            result=(result<(last[nums[i]]-first[nums[i]]+1)?result:(last[nums[i]]-first[nums[i]]+1));
+    }
+    return result;
+}
