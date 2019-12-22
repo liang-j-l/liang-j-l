@@ -1,0 +1,19 @@
+#34.题目：给一个不多于5位的正整数，
+# 要求：一、求它是几位数，二、逆序打印出各位数字。
+a=eval(input("请输入一个整数："))
+count=0
+#list=[]#创建空列表
+while a>0:
+    #list.append(a%10)
+    print(a%10,end='')
+    a=int(a/10)
+    count+=1
+
+print('\n数字是%d位数'%(count))
+
+#将数字转化为字符串
+num=input("请输入一个整数：")
+n=num[::-1]
+print("数字是%d位数"%(len(num)))
+for i in n:
+    print(i)
