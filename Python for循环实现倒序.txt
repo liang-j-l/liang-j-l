@@ -1,0 +1,7 @@
+#如何实现for循环倒序？
+#需要借助函数reversed()
+#reversed()的作用：生成一个反转的可迭代对象
+list1=['a','b','c','d','e']
+list2=reversed(list1)
+for x in list2:
+    print(x)
